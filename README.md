@@ -41,7 +41,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 ## 📥 Executar esse projeto no seu computador
 
-- Clonar Repositório: `git clone https://github.com/thiagorussi/Clone-Redesign-Instagram-WEB.git`
+- Clonar Repositório: `git clone https://github.com/thiagorussi/Cadastro-livros-REACT.git`
 
 - Instalar dependências: `npm install`
 - Rodar Aplicação: `npm start`
