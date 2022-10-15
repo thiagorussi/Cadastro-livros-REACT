@@ -124,15 +124,15 @@ function App() {
   }
 
   return (
-    <>
-      <div className='containerMain' >
+    
+      <div className='containerMain'  >
 
         <div className="container" >
           <div className='tituloCadastro'>
             <div class="mt-10 sm:shadow-lg px-24 rounded-3xl flex flex-row justify-between items-center w-full h-20">
               <label for="large-toggle" class="inline-flex relative items-center cursor-pointer">
                 <input onClick={onOff} type="checkbox" value="" id="large-toggle" class="sr-only peer"></input>
-                <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <div class="w-16 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-100 dark:peer-focus:ring-blue-100 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[8px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-[#6A64F1]"></div>
                 <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>
               </label>
 
@@ -215,7 +215,7 @@ function App() {
                             type="date"
                             name="date"
                             id="date"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-5 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                           />
                         </div>
                       </div>
@@ -227,8 +227,9 @@ function App() {
                         </label>
                         <button
                           onClick={cadastrar}
-                          class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                          class="hover:bg-[#706bf4] hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
                         >
+                        
                           Cadastrar
                         </button>
                       </div>
@@ -310,7 +311,7 @@ function App() {
                     </label>
                     <button
                       onClick={pesquisar}
-                      class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                      class="hover:bg-[#706bf4] hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
                     >
                       Pesquisar
                     </button>
@@ -349,7 +350,7 @@ function App() {
 
         </div>
       </div>
-    </>
+    
   );
 }
 
