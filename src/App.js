@@ -35,22 +35,28 @@ function App() {
 
   function cadastrar() {
     let isThis = true
-    livros.forEach(livro => {
-      if (livro.codigo == codigo) {
-        alert('CÓDIGO JÁ CADASTRADO!')
-        isThis = false
+    if (!codigo || !titulo || !autor || !data) { //validar preenchimento de todos os campos
+      alert('Preencha todos os campos')
+    } else {
+      livros.forEach(livro => {
+        if (livro.codigo == codigo) {
+          alert('CÓDIGO JÁ CADASTRADO!')
+          isThis = false
+        }
+      });
+      if (isThis) {
+        let livro = {
+          codigo: codigo,
+          titulo: titulo,
+          autor: autor,
+          data: data,
+        }
+        //livros.push(livro)   
+        setLivros([...livros, livro])
       }
-    });
-    if (isThis) {
-      let livro = {
-        codigo: codigo,
-        titulo: titulo,
-        autor: autor,
-        data: data,
-      }
-      //livros.push(livro)   
-      setLivros([...livros, livro])
+
     }
+
     limparInputs()
   }
 
@@ -58,6 +64,7 @@ function App() {
     let isThis = false
     if (!codigoPesquisa) {
       alert('Digite o código que deseja pesquisar!')
+      isThis = true
     } else {
       livros.forEach((livro) => {
         if (livro.codigo == codigoPesquisa) {
@@ -73,8 +80,6 @@ function App() {
     if (!isThis) {
       alert('Código não existe!')
     }
-
-
   }
 
   function limparInputs() {
@@ -124,12 +129,14 @@ function App() {
   }
 
   return (
-    
+
+    <>
+
       <div className='containerMain'  >
 
-        <div className="container" >
+        <div class="container" >
           <div className='tituloCadastro'>
-            <div class="mt-10 sm:shadow-lg px-24 rounded-3xl flex flex-row justify-between items-center w-full h-20">
+            <div class="mt-5 shadow-lg p-8 sm:px-24 text-sm rounded-3xl flex flex-row justify-between items-center w-full ">
               <label for="large-toggle" class="inline-flex relative items-center cursor-pointer">
                 <input onClick={onOff} type="checkbox" value="" id="large-toggle" class="sr-only peer"></input>
                 <div class="w-16 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-100 dark:peer-focus:ring-blue-100 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[8px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-[#6A64F1]"></div>
@@ -144,7 +151,7 @@ function App() {
             inCadastro && (
               <>
 
-                <div class="sm:shadow-lg px-3 rounded-3xl "> {/*INPUTS CADASTRO */}
+                <div class="shadow-lg px-3 rounded-3xl p-7"> {/*INPUTS CADASTRO */}
 
                   <div class="mx-auto w-full mt-8 ">
                     <div class="-mx-3 flex flex-wrap">
@@ -222,14 +229,14 @@ function App() {
                       <div class="w-full px-3 sm:w-1/5">
                         <label
                           for="date"
-                          class="mb-9 block text-base"
+                          class="sm:mb-9 block text-base"
                         >
                         </label>
                         <button
                           onClick={cadastrar}
                           class="hover:bg-[#706bf4] hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
                         >
-                        
+
                           Cadastrar
                         </button>
                       </div>
@@ -237,15 +244,22 @@ function App() {
                   </div>
                 </div>
 
-                <table class="w-full flex flex-row flex-no-wrap sm:bg-white sm:shadow-lg rounded-2xl overflow-hidden my-5 "> {/*TABELA CADASTRO*/}
+                <table class="px-3 w-full flex flex-row flex-no-wrap sm:bg-white shadow-lg rounded-2xl overflow-hidden my-5 "> {/*TABELA CADASTRO*/}
                   <thead class="text-white">
-                    <tr class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                      <th class="p-3 text-left">Código</th>
-                      <th class="p-3 text-left">Título</th>
-                      <th class="p-3 text-left">Autor</th>
-                      <th class="p-3 text-left">Data</th>
-                      <th class="p-3 text-left">Excluir</th>
-                    </tr>
+                    {
+                      livros.map(() => {
+                        return (
+                          <tr class="rounded-md bg-[#6A64F1] flex flex-col flex-no wrap sm:table-row rounded-l-lg mb-2 sm:mb-0 outline-none">
+                            <th class="p-3 text-left">Código</th>
+                            <th class="p-3 text-left">Título</th>
+                            <th class="p-3 text-left">Autor</th>
+                            <th class="p-3 text-left">Data</th>
+                            <th class="p-3 text-left " width="110px">Excluir</th>
+                          </tr>
+                        )
+                      })
+                    }
+
                   </thead>
                   <tbody class="flex-1 sm:flex-none ">
                     {
@@ -256,24 +270,18 @@ function App() {
                             <td class="p-3">{livro.titulo}</td>
                             <td class="p-3">{livro.autor}</td>
                             <td class="p-3">{livro.data}</td>
-                            <td class="p-3  "><button onClick={() => excluir(livro.codigo)}><FaTrashAlt /></button></td>
+                            <td class="p-3 "><button onClick={() => excluir(livro.codigo)}><FaTrashAlt /></button></td>
                           </tr>
-
                         )
                       })
                     }
-
-                    <tr class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                      <th class="p-3 text-left">Livros com mesmo título: {titulosIguais()}</th>
-                      <th class="p-3 text-left"></th>
-                      <th class="p-3 text-left"></th>
-                      <th class="p-3 text-left"></th>
-                      <th class="p-3 text-left"></th>
-                    </tr>
-
                   </tbody>
                 </table>
-                
+
+                <div class="shadow-lg rounded-2xl font-semibold text-gray-700 mb-3 ">
+                  <p class="p-3 text-left">Livros com mesmo título: {titulosIguais()}</p>
+                </div>
+
               </>
             )
           }
@@ -284,7 +292,7 @@ function App() {
 
               <div className="containerPesquisa"> {/*PESQUISA*/}
 
-                <div className='Inputpesquisa' class="  flex flex-wrap sm:shadow-lg px-3 rounded-3xl mt-5 ">
+                <div className='Inputpesquisa' class="  flex flex-wrap shadow-lg p-7 rounded-3xl mt-5 ">
                   <div class="w-full  sm:w-1/4 mt-5 ">
                     <div class="mb-3">
                       <label
@@ -303,10 +311,10 @@ function App() {
                       />
                     </div>
                   </div>
-                  <div class="w-full px-3 sm:w-1/5 ">
+                  <div class="w-full sm:px-3 sm:w-1/5 ">
                     <label
                       for=""
-                      class="mb-14 block text-base"
+                      class="sm:mb-14 block text-base"
                     >
                     </label>
                     <button
@@ -319,9 +327,9 @@ function App() {
 
                 </div>
 
-                <table class="w-full flex flex-row flex-no-wrap sm:bg-white overflow-hidden  my-5 sm:shadow-lg  rounded-2xl">
+                <table class="px-3 w-full flex flex-row flex-no-wrap sm:bg-white overflow-hidden  my-5 shadow-lg  rounded-2xl">
                   <thead class="text-white">
-                    <tr class=" hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                    <tr class=" rounded-md bg-[#6A64F1] flex flex-col flex-no wrap sm:table-row rounded-l-lg  mb-2 sm:mb-0">
                       <th class="p-3 text-left">Código</th>
                       <th class="p-3 text-left">Título</th>
                       <th class="p-3 text-left">Autor</th>
@@ -350,7 +358,9 @@ function App() {
 
         </div>
       </div>
-    
+
+    </>
+
   );
 }
 
